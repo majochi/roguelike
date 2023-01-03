@@ -22,6 +22,15 @@ cargo build --release --target wasm32-unknown-unknown
 wasm-bindgen target/wasm32-unknown-unknown/release/roguelike.wasm --out-dir wasm --no-modules
 ```
 
+#### wasm32-wasi
+
+```shell
+rustup target add wasm32-wasi
+cargo build --release --target wasm32-wasi
+docker buildx build --platform wasi/wasm32 -t roguelike .
+docker run --rm --platform wasi/wasm32 --runtime=io.containerd.wasmedge.v1 roguelike
+```
+
 ### Serve Files (local file loading not permitted in browsers)
 
 TODO: explore cargo-web
